@@ -1,65 +1,338 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useEffect } from 'react';
+import { getProjectImage } from '@/lib/projectImages';
+import { socialLinks, getProjectConfig, statusLabels } from '@/lib/constants';
+import PreviewModal from '@/components/PreviewModal';
+import PDFViewer from '@/components/PDFViewer';
+
+const defaultProjects = [
+  {
+    id: 1,
+    title: "Site Portfolio",
+    description: "Construit avec Next.js et Tailwind CSS. Présente mes compétences en développement web avec des motifs de design modernes.",
+    tags: ["Next.js", "Tailwind CSS", "TypeScript"],
+    link: "#",
+    icon: "🌐",
+    stars: 0
+  },
+  {
+    id: 2,
+    title: "Application E-commerce",
+    description: "Projet Full Stack utilisant le frontend React.js et le backend Symfony avec système de paiement intégré.",
+    tags: ["React.js", "Symfony", "MySQL"],
+    link: "#",
+    icon: "🛍️",
+    stars: 0
+  },
+  {
+    id: 3,
+    title: "Application de Gestion de Tâches",
+    description: "Outil de collaboration en temps réel avec authentification utilisateur et capacités de filtrage avancées.",
+    tags: ["React", "Firebase", "Tailwind"],
+    link: "#",
+    icon: "✓",
+    stars: 0
+  }
+];
+
+const skills = [
+  { category: "Frontend", items: ["React.js", "JavaScript", "Bootstrap", "Tailwind CSS"], level: 85 },
+  { category: "Backend", items: ["Symfony", "Node.js", "PHP", "MySQL"], level: 85 },
+  { category: "Outils", items: ["Git", "Postman", "REST API", "DevTools"], level: 80 }
+];
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [projects, setProjects] = useState(defaultProjects);
+  const [previewModal, setPreviewModal] = useState<{
+    isOpen: boolean;
+    projectTitle: string;
+    images: string[];
+  }>({
+    isOpen: false,
+    projectTitle: '',
+    images: [],
+  });
+  const [isPDFOpen, setIsPDFOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('/api/github');
+        if (response.ok) {
+          const data = await response.json();
+          setProjects(data);
+        } else {
+          setProjects(defaultProjects);
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement des projets:', error);
+        setProjects(defaultProjects);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      {/* Navigation */}
+      <nav className="fixed w-full top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+            Sariaka
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-blue-600 hover:text-blue-700 transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            ☰
+          </button>
+
+          <div className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row gap-6 absolute md:relative top-16 md:top-0 left-0 right-0 md:left-auto md:right-auto bg-slate-900 md:bg-transparent p-6 md:p-0 border-b md:border-b-0 border-slate-700`}>
+            <a href="#projects" className="hover:text-blue-600 transition">Projets</a>
+            <a href="#skills" className="hover:text-blue-600 transition">Compétences</a>
+            <a href="#contact" className="hover:text-blue-600 transition">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-6 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute top-20 -left-40 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+          <div className="space-y-8 order-2 md:order-1">
+            <div className="space-y-4">
+              <p className="text-blue-600 font-semibold text-lg">Bienvenue dans mon portfolio 👋</p>
+              <h1 className="text-6xl md:text-7xl font-bold leading-tight">
+                Je suis <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+                  RAZAFIMAHEFA Sariaka
+                </span>
+                <br />
+                <span className="text-4xl md:text-5xl text-slate-300">Développeuse Full Stack</span>
+              </h1>
+              <p className="text-xl text-slate-300 leading-relaxed">
+                Je crée des solutions numériques élégantes avec React.js & Symfony. Je développe des applications web haute performance que les utilisateurs adorent.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => setIsPDFOpen(true)}
+                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-blue-600/50 transition transform hover:scale-105"
+              >
+                Voir mon CV
+              </button>
+              <a
+                href="#projects"
+                className="px-8 py-3 border-2 border-blue-600 text-blue-600 font-bold rounded-lg hover:bg-blue-600 hover:text-white transition"
+              >
+                Voir mes projets
+              </a>
+            </div>
+
+            <div className="flex gap-6 pt-4">
+              <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-600 transition text-2xl" title="GitHub">GitHub</a>
+              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-600 transition text-2xl" title="LinkedIn">LinkedIn</a>
+            </div>
+          </div>
+
+          <div className="relative order-1 md:order-2 flex justify-center md:justify-end">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl blur-2xl opacity-30"></div>
+            <img
+              src="/zah.png"
+              alt="RAZAFIMAHEFA Sariaka - Développeuse Full Stack"
+              className="relative w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl border border-blue-600/20"
             />
-            Deploy Now
-          </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-6 bg-slate-800/50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16">
+            Mes <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Compétences</span>
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {skills.map((skillGroup) => (
+              <div key={skillGroup.category} className="bg-slate-900 p-8 rounded-2xl border border-slate-700 hover:border-blue-600/50 transition">
+                <h3 className="text-xl font-bold mb-6">{skillGroup.category}</h3>
+                <div className="space-y-4">
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {skillGroup.items.map((item) => (
+                      <span key={item} className="px-3 py-1 bg-blue-600/20 text-blue-300 rounded-full text-sm">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-blue-600 to-blue-700 rounded-full transition-all duration-1000"
+                      style={{ width: `${skillGroup.level}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-slate-400 text-sm">{skillGroup.level}% Maîtrise</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16">
+            Projets en <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">vedette</span>
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {projects.map((project) => {
+              const projectImage = getProjectImage(project.title?.toLowerCase().replace(/\s+/g, '-'));
+              const projectConfig = getProjectConfig(project.title?.toLowerCase().replace(/\s+/g, '-') || '');
+              const status = projectConfig?.status || 'completed';
+              const statusInfo = statusLabels[status];
+              
+              return (
+                <div
+                  key={project.id}
+                  className="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 hover:border-blue-600 transition transform hover:scale-105 cursor-pointer overflow-hidden"
+                >
+                  {/* Status Badge */}
+                  <div className={`absolute top-4 right-4 z-10 px-3 py-1 rounded-full border text-sm font-semibold ${statusInfo.color}`}>
+                    {statusInfo.label}
+                  </div>
+
+                  {/* Image Container */}
+                  {projectImage ? (
+                    <div className="relative h-48 overflow-hidden bg-slate-900">
+                      <img
+                        src={projectImage}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900 opacity-80"></div>
+                    </div>
+                  ) : (
+                    <div className="h-48 bg-gradient-to-br from-blue-600/20 to-slate-800 flex items-center justify-center">
+                      <span className="text-6xl">{project.icon}</span>
+                    </div>
+                  )}
+
+                  {/* Content */}
+                  <div className="p-8">
+                    <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-600 transition">
+                      {project.title}
+                    </h3>
+                    
+                    <p className="text-slate-400 mb-6 line-clamp-3">
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="text-xs px-2 py-1 bg-slate-700/50 text-slate-300 rounded border border-slate-600">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Stats if available */}
+                    {project.stars !== undefined && (
+                      <div className="text-slate-400 text-sm mb-4">
+                        ⭐ {project.stars} stars
+                      </div>
+                    )}
+
+                    <div className="flex gap-3 flex-wrap">
+                      {projectConfig?.previewImages && projectConfig.previewImages.length > 0 && (
+                        <button
+                          onClick={() => setPreviewModal({
+                            isOpen: true,
+                            projectTitle: project.title,
+                            images: projectConfig.previewImages || [],
+                          })}
+                          className="px-4 py-2 bg-blue-600/20 border border-blue-600 text-blue-400 hover:bg-blue-600/40 hover:text-blue-300 font-semibold rounded-lg transition"
+                        >
+                          📸 Aperçu
+                        </button>
+                      )}
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition"
+                      >
+                        Voir le projet →
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-6 bg-slate-800/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Prêt à <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">collaborer</span> ?
+          </h2>
+          
+          <p className="text-xl text-slate-300 mb-10">
+            Je suis toujours intéressé par les nouveaux projets et les opportunités.
+          </p>
+
+          <div className="space-y-4 mb-10">
+            <p className="text-lg">
+              📧 <a href={`mailto:${socialLinks.email}`} className="text-blue-600 hover:text-blue-700 font-semibold transition">
+                {socialLinks.email}
+              </a>
+            </p>
+            <p className="text-lg">
+              📱 <span className="text-blue-600 font-semibold">{socialLinks.phone}</span>
+            </p>
+          </div>
+
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`mailto:${socialLinks.email}`}
+            className="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-blue-600/50 transition transform hover:scale-105"
           >
-            Documentation
+            M&apos;envoyer un email
           </a>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-700 py-8 px-6 bg-slate-900">
+        <div className="max-w-6xl mx-auto text-center text-slate-400">
+          <p>© 2025 RAZAFIMAHEFA Sariaka. Tous droits réservés.</p>
+        </div>
+      </footer>
+
+      {/* Preview Modal */}
+      <PreviewModal
+        projectTitle={previewModal.projectTitle}
+        images={previewModal.images}
+        isOpen={previewModal.isOpen}
+        onClose={() => setPreviewModal({ isOpen: false, projectTitle: '', images: [] })}
+      />
+
+      {/* PDF Viewer */}
+      <PDFViewer
+        isOpen={isPDFOpen}
+        onClose={() => setIsPDFOpen(false)}
+        pdfUrl={socialLinks.cv}
+      />
+    </main>
   );
 }
