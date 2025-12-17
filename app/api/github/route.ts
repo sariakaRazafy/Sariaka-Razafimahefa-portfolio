@@ -59,7 +59,7 @@ export async function GET() {
     }
 
     const projects = repos
-      .filter((repo: { fork: boolean }) => !repo.fork) // Exclure les forks par défaut
+      .filter((repo: { fork: boolean; name: string }) => !repo.fork && !['flowtalk', 'portfolio'].includes(repo.name.toLowerCase()) && repo.name !== 'medipass') // Exclure les forks et certains projets
       .map((repo: { id: number; name: string; description: string; topics?: string[]; html_url: string; stargazers_count: number; language?: string; private: boolean }) => ({
         id: repo.id,
         title: repo.name,

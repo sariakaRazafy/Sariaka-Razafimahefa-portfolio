@@ -2,8 +2,11 @@
 // Mappez le nom de votre repo avec son image de présentation
 
 export const projectImagesMap: Record<string, string> = {
-  // Exemple: 'mon-super-projet': '/projects/mon-super-projet.png',
-  // Ajoutez vos mappages ici
+  'medipass': '/projects/medipass.png',
+  'eagle-ai': '/projects/eagle_ai.png',
+  'portfolio': '/projects/portfolio.png',
+  'epicerie': '/projects/epicerie.jpg',
+  'jiramabot-assistance': '/projects/jiramabot-assistance.png',
 };
 
 export function getProjectImage(repoName: string): string | null {

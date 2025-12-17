@@ -1,6 +1,6 @@
-'use client';
+ 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface PreviewModalProps {
   projectTitle: string;
@@ -15,7 +15,14 @@ export default function PreviewModal({
   isOpen,
   onClose,
 }: PreviewModalProps) {
+  // Use key-based reset: force component remount when projectTitle changes
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('PreviewModal images:', images);
+    }
+  }, [images]);
 
   if (!isOpen) return null;
 
@@ -59,7 +66,13 @@ export default function PreviewModal({
             </div>
           )}
         </div>
-
+         {/* Dev-only debug: show URL */}
+         {process.env.NODE_ENV !== 'production' && images.length > 0 && (
+           <div className="p-4 border-t border-slate-700 text-slate-300">
+           { /*  <div className="mb-2">Debug URL: <span className="font-mono text-sm">{images[currentIndex]}</span></div>
+             <div className="text-xs text-slate-400">Vérifiez la console réseau pour les erreurs 404 et la casse du fichier.</div>
+           */ }</div>
+         )}
         {/* Navigation */}
         {images.length > 1 && (
           <div className="flex items-center justify-between p-6 border-t border-slate-700">

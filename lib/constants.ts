@@ -25,13 +25,6 @@ export const projectsConfig: Array<{
   description?: string;
 }> = [
   {
-    repoName: 'flowtalk',
-    image: '/projects/flowtalk.png',
-    previewImages: ['/previews/flowtalk-1.png', '/previews/flowtalk-2.png', '/previews/flowtalk-3.png'],
-    status: 'in-progress',
-    description: 'Plateforme de communication en temps réel'
-  },
-  {
     repoName: 'medipass',
     image: '/projects/medipass.png',
     previewImages: ['/previews/medipass-1.png', '/previews/medipass-2.png', '/previews/medipass-3.png'],
@@ -40,8 +33,8 @@ export const projectsConfig: Array<{
   },
   {
     repoName: 'eagle-ai',
-    image: '/logo3.png',
-    previewImages: ['/logo3.png', '/previews/eagle-ai-2.png', '/previews/eagle-ai-3.png'],
+    image: '/projects/eagle_ai.png',
+    previewImages: ['/projects/eagle_ai.png', '/previews/eagle-ai-2.png', '/previews/eagle-ai-3.png'],
     status: 'in-progress',
     description: 'Système d\'IA avancé'
   },
@@ -53,9 +46,17 @@ export const projectsConfig: Array<{
   },
   {
     repoName: 'epicerie',
-    previewImages: ['/previews/epicerie-1.png', '/previews/epicerie-2.png', '/previews/epicerie-3.png'],
+    previewImages: ['/previews/epicerie-1.PNG', '/previews/epicerie-2.PNG', '/previews/epicerie-3.PNG','/previews/epicerie-4.PNG','/previews/epicerie-5.PNG','/previews/epicerie-6.PNG'],
     status: 'completed',
     description: 'Application de gestion d\'épicerie'
+  }
+  ,
+  {
+    repoName: 'jiramabot-assistance',
+    image: '/projects/jiramabot-assistance.png',
+    previewImages: ['/previews/jiramabot-1.PNG', '/previews/jiramabot-2.PNG', '/previews/jiramabot-3.PNG','/previews/jiramabot-4.PNG', '/previews/jiramabot-5.PNG', '/previews/jiramabot-6.PNG', '/previews/jiramabot-7.PNG', '/previews/jiramabot-8.PNG', '/previews/jiramabot-9.PNG', '/previews/jiramabot-10.PNG', '/previews/jiramabot-11.PNG'],
+    status: 'completed',
+    description: "Chatbot d'assistance 24/7 pour Jirama — factures, auto-relevés, déclarations d'incidents et réclamations. Technologies: PHP Symfony, JavaScript, Meta for Developers, Postman, Git/GitHub."
   }
 ];
 

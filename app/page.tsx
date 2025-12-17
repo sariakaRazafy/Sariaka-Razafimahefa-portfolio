@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { getProjectImage } from '@/lib/projectImages';
 import { socialLinks, getProjectConfig, statusLabels } from '@/lib/constants';
 import PreviewModal from '@/components/PreviewModal';
@@ -8,30 +9,12 @@ import PDFViewer from '@/components/PDFViewer';
 
 const defaultProjects = [
   {
-    id: 1,
-    title: "Site Portfolio",
-    description: "Construit avec Next.js et Tailwind CSS. Présente mes compétences en développement web avec des motifs de design modernes.",
-    tags: ["Next.js", "Tailwind CSS", "TypeScript"],
+    id: 4,
+    title: "JiramaBot Assistance",
+    description: "Assistant pour la gestion et l'assistance (bot Telegram/Discord) pour Jirama.",
+    tags: ["PHP", "Symfony", "JavaScript", "Meta for Developers", "Postman", "Git", "GitHub"],
     link: "#",
-    icon: "🌐",
-    stars: 0
-  },
-  {
-    id: 2,
-    title: "Application E-commerce",
-    description: "Projet Full Stack utilisant le frontend React.js et le backend Symfony avec système de paiement intégré.",
-    tags: ["React.js", "Symfony", "MySQL"],
-    link: "#",
-    icon: "🛍️",
-    stars: 0
-  },
-  {
-    id: 3,
-    title: "Application de Gestion de Tâches",
-    description: "Outil de collaboration en temps réel avec authentification utilisateur et capacités de filtrage avancées.",
-    tags: ["React", "Firebase", "Tailwind"],
-    link: "#",
-    icon: "✓",
+    icon: "🤖",
     stars: 0
   }
 ];
@@ -62,8 +45,18 @@ export default function Home() {
         const response = await fetch('/api/github');
         if (response.ok) {
           const data = await response.json();
-          setProjects(data);
+          console.log('DEBUG: fetched projects from /api/github', data);
+          // Merge remote projects with local defaultProjects so local cards
+          // (like "JiramaBot Assistance") are kept when not present remotely.
+          const existingTitles = data.map((p: { title?: string }) => String(p.title || '').toLowerCase());
+          const merged = [
+            ...data,
+            ...defaultProjects.filter(dp => !existingTitles.includes(dp.title.toLowerCase()))
+          ];
+          console.log('DEBUG: merged projects', merged);
+          setProjects(merged);
         } else {
+          console.warn('DEBUG: /api/github returned non-ok status', response.status);
           setProjects(defaultProjects);
         }
       } catch (error) {
@@ -74,6 +67,8 @@ export default function Home() {
 
     fetchProjects();
   }, []);
+
+  console.log('DEBUG: projects state (render)', projects);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
@@ -117,8 +112,7 @@ export default function Home() {
                 <span className="text-4xl md:text-5xl text-slate-300">Développeuse Full Stack</span>
               </h1>
               <p className="text-xl text-slate-300 leading-relaxed">
-                Je crée des solutions numériques élégantes avec React.js & Symfony. Je développe des applications web haute performance que les utilisateurs adorent.
-              </p>
+                Jeune diplômée en Informatique et Télécommunications, je suis développeuse web full stack spécialisée en JavaScript (front-end) et PHP/Symfony (back-end). Je conçois et développe des applications web en utilisant les outils essentiels du développement moderne, avec des bases en intelligence artificielle. Curieuse, autonome et rigoureuse, je souhaite évoluer dans un environnement dynamique où je pourrai mettre en pratique mes compétences et continuer à apprendre.</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -144,9 +138,11 @@ export default function Home() {
 
           <div className="relative order-1 md:order-2 flex justify-center md:justify-end">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl blur-2xl opacity-30"></div>
-            <img
+            <Image
               src="/zah.png"
               alt="RAZAFIMAHEFA Sariaka - Développeuse Full Stack"
+              width={420}
+              height={420}
               className="relative w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl border border-blue-600/20"
             />
           </div>
@@ -213,10 +209,11 @@ export default function Home() {
                   {/* Image Container */}
                   {projectImage ? (
                     <div className="relative h-48 overflow-hidden bg-slate-900">
-                      <img
+                      <Image
                         src={projectImage}
                         alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
+                        fill
+                        className="object-cover group-hover:scale-110 transition duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900 opacity-80"></div>
                     </div>
@@ -233,7 +230,7 @@ export default function Home() {
                     </h3>
                     
                     <p className="text-slate-400 mb-6 line-clamp-3">
-                      {project.description}
+                      {projectConfig?.description || project.description}
                     </p>
 
                     <div className="flex flex-wrap gap-2 mb-6">
@@ -321,6 +318,7 @@ export default function Home() {
 
       {/* Preview Modal */}
       <PreviewModal
+        key={previewModal.projectTitle}
         projectTitle={previewModal.projectTitle}
         images={previewModal.images}
         isOpen={previewModal.isOpen}
