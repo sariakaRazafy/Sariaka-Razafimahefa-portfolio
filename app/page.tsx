@@ -9,6 +9,33 @@ import PDFViewer from '@/components/PDFViewer';
 
 const defaultProjects = [
   {
+    id: 1,
+    title: "Eagle-AI",
+    description: "Système de surveillance intelligent combinant IA, reconnaissance faciale, analyse d'expression et notifications en temps réel.",
+    tags: ["AI", "Computer Vision", "Node.js"],
+    link: "https://github.com/sariakaRazafy/Eagle-AI",
+    icon: "🦅",
+    stars: 0
+  },
+  {
+    id: 2,
+    title: "MediPass",
+    description: "Application web médicale intelligente (React + Node.js + MongoDB).",
+    tags: ["React", "Node.js", "MongoDB"],
+    link: "https://github.com/sariakaRazafy/MediPass",
+    icon: "💊",
+    stars: 0
+  },
+  {
+    id: 3,
+    title: "Epicerie",
+    description: "Application de gestion d'épicerie (catalogue, panier, commandes).",
+    tags: ["PHP", "Symfony", "MySQL"],
+    link: "https://github.com/sariakaRazafy/Epicerie",
+    icon: "🛒",
+    stars: 0
+  },
+  {
     id: 4,
     title: "JiramaBot Assistance",
     description: "Assistant pour la gestion et l'assistance (bot Telegram/Discord) pour Jirama.",
