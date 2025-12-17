@@ -98,8 +98,19 @@ export default function Home() {
   console.log('DEBUG: projects state (render)', projects);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      {/* Navigation */}
+    <>
+      {/* Animated Background */}
+      <div className="animated-bg">
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+        <div className="blob blob-3"></div>
+        <div className="blob blob-4"></div>
+        <div className="blob blob-5"></div>
+      </div>
+
+      {/* Main Content - TRANSPARENT background to show blobs */}
+      <main className="min-h-screen bg-transparent text-white relative">
+        {/* Navigation */}
       <nav className="fixed w-full top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
@@ -122,7 +133,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 relative overflow-hidden">
+      <section className="pt-32 pb-20 px-6 relative overflow-hidden z-10">
         {/* Background Effects */}
         <div className="absolute top-20 -left-40 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
@@ -177,7 +188,7 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 px-6 bg-slate-800/50">
+      <section id="skills" className="py-20 px-6 bg-slate-800/50 relative z-10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16">
             Mes <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Compétences</span>
@@ -210,7 +221,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-6">
+      <section id="projects" className="py-20 px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16">
             Projets en <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">vedette</span>
@@ -306,7 +317,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 bg-slate-800/50">
+      <section id="contact" className="py-20 px-6 bg-slate-800/50 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">
             Prêt à <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">collaborer</span> ?
@@ -337,7 +348,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-700 py-8 px-6 bg-slate-900">
+      <footer className="border-t border-slate-700 py-8 px-6 bg-slate-900 relative z-10">
         <div className="max-w-6xl mx-auto text-center text-slate-400">
           <p>© 2025 RAZAFIMAHEFA Sariaka. Tous droits réservés.</p>
         </div>
@@ -359,5 +370,6 @@ export default function Home() {
         pdfUrl={socialLinks.cv}
       />
     </main>
+    </>
   );
 }
