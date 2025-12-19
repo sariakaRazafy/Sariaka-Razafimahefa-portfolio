@@ -6,6 +6,8 @@ import { getProjectImage } from '@/lib/projectImages';
 import { socialLinks, getProjectConfig, statusLabels } from '@/lib/constants';
 import PreviewModal from '@/components/PreviewModal';
 import PDFViewer from '@/components/PDFViewer';
+import ProjectCarousel from '@/components/ProjectCarousel';
+import SkillsVisualization from '@/components/SkillsVisualization';
 
 const defaultProjects = [
   {
@@ -28,6 +30,15 @@ const defaultProjects = [
   },
   {
     id: 3,
+    title: "Music Tiles",
+    description: "Jeu interactif de tuiles musicales - Cliquez sur les tuiles au rythme de la musique pour marquer des points.",
+    tags: ["React", "Web Audio", "Interactive"],
+    link: "https://github.com/sariakaRazafy/Music-Tiles",
+    icon: "🎵",
+    stars: 0
+  },
+  {
+    id: 4,
     title: "Epicerie",
     description: "Application de gestion d'épicerie (catalogue, panier, commandes).",
     tags: ["PHP", "Symfony", "MySQL"],
@@ -36,7 +47,7 @@ const defaultProjects = [
     stars: 0
   },
   {
-    id: 4,
+    id: 5,
     title: "JiramaBot Assistance",
     description: "Assistant pour la gestion et l'assistance (bot Telegram/Discord) pour Jirama.",
     tags: ["PHP", "Symfony", "JavaScript", "Meta for Developers", "Postman", "Git", "GitHub"],
@@ -101,11 +112,32 @@ export default function Home() {
     <>
       {/* Animated Background */}
       <div className="animated-bg">
+        {/* Blobs */}
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>
         <div className="blob blob-3"></div>
         <div className="blob blob-4"></div>
         <div className="blob blob-5"></div>
+        
+        {/* Geometric Shapes */}
+        {/* Squares */}
+        <div className="geometric-shape square square-1"></div>
+        <div className="geometric-shape square square-2"></div>
+        <div className="geometric-shape square square-3"></div>
+        <div className="geometric-shape square square-4"></div>
+        
+        {/* Lines */}
+        <div className="geometric-shape line line-1"></div>
+        <div className="geometric-shape line line-2"></div>
+        
+        {/* Circles */}
+        <div className="geometric-shape circle circle-1"></div>
+        <div className="geometric-shape circle circle-2"></div>
+        <div className="geometric-shape circle circle-3"></div>
+        
+        {/* Triangles */}
+        <div className="geometric-shape triangle triangle-1"></div>
+        <div className="geometric-shape triangle triangle-2"></div>
       </div>
 
       {/* Main Content - TRANSPARENT background to show blobs */}
@@ -141,7 +173,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div className="space-y-8 order-2 md:order-1">
             <div className="space-y-4">
-              <p className="text-blue-600 font-semibold text-lg">Bienvenue dans mon portfolio 👋</p>
+              <p className="text-blue-600 font-semibold text-3xl text-center">Bienvenue dans mon portfolio 👋</p>
               <h1 className="text-6xl md:text-7xl font-bold leading-tight">
                 Je suis <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                   RAZAFIMAHEFA Sariaka
@@ -150,7 +182,7 @@ export default function Home() {
                 <span className="text-4xl md:text-5xl text-slate-300">Développeuse Full Stack</span>
               </h1>
               <p className="text-xl text-slate-300 leading-relaxed">
-                Jeune diplômée en Informatique et Télécommunications, je suis développeuse web full stack spécialisée en JavaScript (front-end) et PHP/Symfony (back-end). Je conçois et développe des applications web en utilisant les outils essentiels du développement moderne, avec des bases en intelligence artificielle. Curieuse, autonome et rigoureuse, je souhaite évoluer dans un environnement dynamique où je pourrai mettre en pratique mes compétences et continuer à apprendre.</p>
+                Jeune diplômée d&apos;une licence en Informatique et Télécommunications, je suis développeuse web full stack spécialisée en JavaScript (front-end) et PHP/Symfony (back-end). Je conçois et développe des applications web en utilisant les outils essentiels du développement moderne, avec des bases en intelligence artificielle. Curieuse, autonome et rigoureuse, je souhaite évoluer dans un environnement dynamique où je pourrai mettre en pratique mes compétences et continuer à apprendre.</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -168,182 +200,190 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="flex gap-6 pt-4">
-              <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-600 transition text-2xl" title="GitHub">GitHub</a>
-              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-600 transition text-2xl" title="LinkedIn">LinkedIn</a>
+            <div className="flex gap-8 pt-4">
+              <a 
+                href={socialLinks.github} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="GitHub"
+                className="group relative"
+              >
+                <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-lg group-hover:bg-blue-600/40 transition-all duration-300" style={{animation: 'pulse 2s ease-in-out infinite'}}></div>
+                <svg 
+                  className="w-14 h-14 text-slate-400 group-hover:text-blue-600 transition-all duration-300 transform group-hover:scale-110" 
+                  fill="currentColor" 
+                  viewBox="0 0 24 24"
+                  style={{animation: 'float 3s ease-in-out infinite'}}
+                >
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              <a 
+                href={socialLinks.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                title="LinkedIn"
+                className="group relative"
+              >
+                <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-lg group-hover:bg-blue-600/40 transition-all duration-300" style={{animation: 'pulse 2s ease-in-out infinite', animationDelay: '0.3s'}}></div>
+                <svg 
+                  className="w-14 h-14 text-slate-400 group-hover:text-blue-600 transition-all duration-300 transform group-hover:scale-110" 
+                  fill="currentColor" 
+                  viewBox="0 0 24 24"
+                  style={{animation: 'float 3s ease-in-out infinite', animationDelay: '0.2s'}}
+                >
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
             </div>
           </div>
 
           <div className="relative order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl blur-2xl opacity-30"></div>
-            <Image
-              src="/zah.png"
-              alt="RAZAFIMAHEFA Sariaka - Développeuse Full Stack"
-              width={420}
-              height={420}
-              className="relative w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl border border-blue-600/20"
+            {/* Animated Background Blobs */}
+            <div 
+              className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl blur-2xl opacity-30" 
+              style={{animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite'}}
             />
+            
+            {/* Animated Squares - Left Side */}
+            <div 
+              className="absolute w-8 h-8 bg-blue-600 border border-blue-400" 
+              style={{animation: 'pulse 2s ease-in-out infinite', left: '-40px', top: '20px', opacity: 0.7}}
+            />
+            <div 
+              className="absolute w-6 h-6 bg-purple-600 border border-purple-400" 
+              style={{animation: 'pulse 2s ease-in-out infinite', animationDelay: '0.5s', left: '-50px', top: '120px', opacity: 0.6}}
+            />
+            
+            {/* Animated Squares - Right Side */}
+            <div 
+              className="absolute w-8 h-8 bg-blue-600 border border-blue-400" 
+              style={{animation: 'pulse 2s ease-in-out infinite', right: '-40px', top: '30px', opacity: 0.7}}
+            />
+            <div 
+              className="absolute w-6 h-6 bg-purple-600 border border-purple-400" 
+              style={{animation: 'pulse 2s ease-in-out infinite', animationDelay: '0.5s', right: '-50px', bottom: '80px', opacity: 0.6}}
+            />
+            
+            {/* Floating Orbs */}
+            <div 
+              className="absolute w-20 h-20 bg-blue-600/30 rounded-full blur-2xl" 
+              style={{animation: 'float 6s ease-in-out infinite', top: '-20px', left: '20px'}}
+            />
+            <div 
+              className="absolute w-16 h-16 bg-purple-600/20 rounded-full blur-2xl" 
+              style={{animation: 'float 7s ease-in-out infinite', animationDelay: '-2s', bottom: '10px', right: '10px'}}
+            />
+            
+            {/* Main Image Container */}
+            <div className="relative w-full max-w-xs md:max-w-sm rounded-3xl overflow-hidden" style={{animation: 'float 5s ease-in-out infinite'}}>
+              <Image
+                src="/zah.png"
+                alt="RAZAFIMAHEFA Sariaka - Développeuse Full Stack"
+                width={420}
+                height={420}
+                className="relative w-full h-auto rounded-3xl shadow-2xl border-2 border-blue-600/40 hover:border-blue-600 transition-colors duration-300"
+                style={{animation: 'imageGlow 3s ease-in-out infinite'}}
+              />
+              
+              {/* Shimmer Effect Overlay */}
+              <div 
+                className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white to-transparent opacity-0 hover:opacity-20 transition-opacity duration-300" 
+                style={{animation: 'shimmer 3s infinite'}}
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Skills Section */}
       <section id="skills" className="py-20 px-6 bg-slate-800/50 relative z-10">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16">
             Mes <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Compétences</span>
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {skills.map((skillGroup) => (
-              <div key={skillGroup.category} className="bg-slate-900 p-8 rounded-2xl border border-slate-700 hover:border-blue-600/50 transition">
-                <h3 className="text-xl font-bold mb-6">{skillGroup.category}</h3>
-                <div className="space-y-4">
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {skillGroup.items.map((item) => (
-                      <span key={item} className="px-3 py-1 bg-blue-600/20 text-blue-300 rounded-full text-sm">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-blue-600 to-blue-700 rounded-full transition-all duration-1000"
-                      style={{ width: `${skillGroup.level}%` }}
-                    ></div>
-                  </div>
-                  <p className="text-slate-400 text-sm">{skillGroup.level}% Maîtrise</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <SkillsVisualization />
         </div>
       </section>
 
       {/* Projects Section */}
       <section id="projects" className="py-20 px-6 relative z-10">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16">
             Projets en <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">vedette</span>
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {projects.map((project) => {
-              const projectImage = getProjectImage(project.title?.toLowerCase().replace(/\s+/g, '-'));
-              const projectConfig = getProjectConfig(project.title?.toLowerCase().replace(/\s+/g, '-') || '');
-              const status = projectConfig?.status || 'completed';
-              const statusInfo = statusLabels[status];
-              
-              return (
-                <div
-                  key={project.id}
-                  className="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 hover:border-blue-600 transition transform hover:scale-105 cursor-pointer overflow-hidden"
-                >
-                  {/* Status Badge */}
-                  <div className={`absolute top-4 right-4 z-10 px-3 py-1 rounded-full border text-sm font-semibold ${statusInfo.color}`}>
-                    {statusInfo.label}
-                  </div>
-
-                  {/* Image Container */}
-                  {projectImage ? (
-                    <div className="relative h-48 overflow-hidden bg-slate-900">
-                      <Image
-                        src={projectImage}
-                        alt={project.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900 opacity-80"></div>
-                    </div>
-                  ) : (
-                    <div className="h-48 bg-gradient-to-br from-blue-600/20 to-slate-800 flex items-center justify-center">
-                      <span className="text-6xl">{project.icon}</span>
-                    </div>
-                  )}
-
-                  {/* Content */}
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-600 transition">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="text-slate-400 mb-6 line-clamp-3">
-                      {projectConfig?.description || project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="text-xs px-2 py-1 bg-slate-700/50 text-slate-300 rounded border border-slate-600">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Stats if available */}
-                    {project.stars !== undefined && (
-                      <div className="text-slate-400 text-sm mb-4">
-                        ⭐ {project.stars} stars
-                      </div>
-                    )}
-
-                    <div className="flex gap-3 flex-wrap">
-                      {projectConfig?.previewImages && projectConfig.previewImages.length > 0 && (
-                        <button
-                          onClick={() => setPreviewModal({
-                            isOpen: true,
-                            projectTitle: project.title,
-                            images: projectConfig.previewImages || [],
-                          })}
-                          className="px-4 py-2 bg-blue-600/20 border border-blue-600 text-blue-400 hover:bg-blue-600/40 hover:text-blue-300 font-semibold rounded-lg transition"
-                        >
-                          📸 Aperçu
-                        </button>
-                      )}
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition"
-                      >
-                        Voir le projet →
-                      </a>
-                    </div>
-                  </div>
-                </div>
+          <ProjectCarousel
+            projects={projects}
+            onPreviewClick={(project) => {
+              const projectConfig = getProjectConfig(
+                project.title?.toLowerCase().replace(/\s+/g, '-') || ''
               );
-            })}
-          </div>
+              if (projectConfig?.previewImages) {
+                setPreviewModal({
+                  isOpen: true,
+                  projectTitle: project.title,
+                  images: projectConfig.previewImages,
+                });
+              }
+            }}
+          />
         </div>
       </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6 bg-slate-800/50 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold mb-6 text-center">
             Prêt à <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">collaborer</span> ?
           </h2>
           
-          <p className="text-xl text-slate-300 mb-10">
+          <p className="text-xl text-slate-300 mb-10 text-center">
             Je suis toujours intéressé par les nouveaux projets et les opportunités.
           </p>
 
-          <div className="space-y-4 mb-10">
-            <p className="text-lg">
-              📧 <a href={`mailto:${socialLinks.email}`} className="text-blue-600 hover:text-blue-700 font-semibold transition">
-                {socialLinks.email}
+          <div className="grid md:grid-cols-2 gap-12 mb-10 items-center">
+            {/* Left - contact links with icons */}
+            <div className="flex flex-col items-center md:items-start justify-center space-y-6">
+              <a href={`mailto:${socialLinks.email}`} className="w-full md:w-auto flex items-center gap-4 px-6 py-3 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition">
+                <svg className="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 8.5L12 13l9-4.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <rect x="3" y="5" width="18" height="14" rx="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-lg font-semibold text-blue-300">{socialLinks.email}</span>
               </a>
-            </p>
-            <p className="text-lg">
-              📱 <span className="text-blue-600 font-semibold">{socialLinks.phone}</span>
-            </p>
+
+              <a href={`tel:${socialLinks.phone}`} className="w-full md:w-auto flex items-center gap-4 px-6 py-3 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition">
+                <svg className="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.08 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.12.87.34 1.71.65 2.5a2 2 0 0 1-.45 2.11L8.91 10.91a16 16 0 0 0 6 6l1.58-1.58a2 2 0 0 1 2.11-.45c.79.31 1.63.53 2.5.65A2 2 0 0 1 22 16.92z" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-lg font-semibold text-blue-300">{socialLinks.phone}</span>
+              </a>
+            </div>
+
+            {/* Right - invitation to scan and QR codes with labels */}
+            <div className="flex flex-col items-center md:items-end justify-center">
+              <p className="text-2xl font-semibold text-slate-200 mb-8">Ou scannez-moi</p>
+
+              <div className="flex gap-8">
+                <div className="flex flex-col items-center">
+                  <p className="text-sm font-semibold text-slate-300 mb-2">Email</p>
+                  <a href={`mailto:${socialLinks.email}`} className="inline-block bg-white p-3 rounded-lg shadow-lg hover:shadow-blue-600/50 transition-shadow">
+                    <img className="w-28 h-28 object-contain" src="/projects/email-qr.jfif" alt="QR code email" />
+                  </a>
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <p className="text-sm font-semibold text-slate-300 mb-2">Téléphone</p>
+                  <a href={`tel:${socialLinks.phone}`} className="inline-block bg-white p-3 rounded-lg shadow-lg hover:shadow-blue-600/50 transition-shadow">
+                    <img className="w-28 h-28 object-contain" src="/projects/phone-qr.jfif" alt="QR code téléphone" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <a
-            href={`mailto:${socialLinks.email}`}
-            className="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-blue-600/50 transition transform hover:scale-105"
-          >
-            M&apos;envoyer un email
-          </a>
         </div>
       </section>
 

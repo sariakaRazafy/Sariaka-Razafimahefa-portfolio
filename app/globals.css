@@ -64,6 +64,33 @@
   }
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes imageGlow {
+  0%, 100% {
+    filter: brightness(1) drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+  }
+  50% {
+    filter: brightness(1.05) drop-shadow(0 0 30px rgba(59, 130, 246, 0.6));
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
 /* ========================
    ANIMATED BACKGROUND
    ======================== */
@@ -131,4 +158,142 @@
   bottom: 100px;
   right: 0px;
   animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* ========================
+   GEOMETRIC SHAPES
+   ======================== */
+
+.geometric-shape {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Squares */
+.square {
+  border: 2px solid;
+}
+
+.square-1 {
+  width: 80px;
+  height: 80px;
+  border-color: rgba(59, 130, 246, 0.3);
+  top: 10%;
+  right: 5%;
+  animation: rotate-slow 15s linear infinite;
+}
+
+.square-2 {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(168, 85, 247, 0.2);
+  bottom: 20%;
+  left: 8%;
+  animation: rotate-slow 20s linear infinite reverse;
+}
+
+.square-3 {
+  width: 100px;
+  height: 100px;
+  border-color: rgba(34, 197, 94, 0.15);
+  top: 50%;
+  left: 2%;
+  animation: rotate-slow 25s linear infinite;
+}
+
+.square-4 {
+  width: 70px;
+  height: 70px;
+  border-color: rgba(236, 72, 153, 0.2);
+  bottom: 5%;
+  right: 10%;
+  animation: rotate-slow 18s linear infinite reverse;
+}
+
+/* Diagonal Lines */
+.line {
+  border-left: 2px solid;
+  transform: rotate(45deg);
+}
+
+.line-1 {
+  width: 2px;
+  height: 150px;
+  border-color: rgba(59, 130, 246, 0.2);
+  top: 15%;
+  right: 20%;
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.line-2 {
+  width: 2px;
+  height: 120px;
+  border-color: rgba(168, 85, 247, 0.15);
+  bottom: 15%;
+  left: 15%;
+  animation: float-slow 10s ease-in-out infinite reverse;
+}
+
+/* Circles */
+.circle {
+  border: 2px solid;
+  border-radius: 50%;
+}
+
+.circle-1 {
+  width: 120px;
+  height: 120px;
+  border-color: rgba(14, 165, 233, 0.2);
+  top: 60%;
+  right: 5%;
+  animation: pulse-glow 6s ease-in-out infinite;
+}
+
+.circle-2 {
+  width: 90px;
+  height: 90px;
+  border-color: rgba(236, 72, 153, 0.15);
+  bottom: 30%;
+  right: 25%;
+  animation: pulse-glow 7s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.circle-3 {
+  width: 110px;
+  height: 110px;
+  border-color: rgba(59, 130, 246, 0.15);
+  top: 25%;
+  left: 3%;
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* Triangles (using clip-path) */
+.triangle {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 50%, transparent 50%);
+}
+
+.triangle-1 {
+  top: 40%;
+  left: 10%;
+  animation: float 12s ease-in-out infinite;
+}
+
+.triangle-2 {
+  bottom: 10%;
+  right: 15%;
+  animation: float-reverse 14s ease-in-out infinite;
+}
+
+/* Keyframes for shapes */
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

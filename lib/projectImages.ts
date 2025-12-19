@@ -4,7 +4,7 @@
 export const projectImagesMap: Record<string, string> = {
   'medipass': '/projects/medipass.png',
   'eagle-ai': '/projects/eagle_ai.png',
-  'portfolio': '/projects/portfolio.png',
+  'music-tiles': '/projects/music-tiles.png',
   'epicerie': '/projects/epicerie.jpg',
   'jiramabot-assistance': '/projects/jiramabot-assistance.png',
 };

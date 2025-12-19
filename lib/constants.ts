@@ -39,10 +39,11 @@ export const projectsConfig: Array<{
     description: 'Système d\'IA avancé'
   },
   {
-    repoName: 'portfolio',
-    previewImages: ['/previews/portfolio-1.png', '/previews/portfolio-2.png', '/previews/portfolio-3.png'],
-    status: 'in-progress',
-    description: 'Portfolio personnel moderne'
+    repoName: 'music-tiles',
+    image: '/projects/music-tiles.png',
+    previewImages: ['/previews/music-tiles-1.png', '/previews/music-tiles-2.png', '/previews/music-tiles-3.png','/previews/music-tiles-4.png','/previews/music-tiles-5.png','/previews/music-tiles-6.png','/previews/music-tiles-7.png','/previews/music-tiles-8.png'],
+    status: 'completed',
+    description: 'Jeu interactif de tuiles musicales - Cliquez sur les tuiles au rythme de la musique pour marquer des points'
   },
   {
     repoName: 'epicerie',
