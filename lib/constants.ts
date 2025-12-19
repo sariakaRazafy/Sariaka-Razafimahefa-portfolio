@@ -41,7 +41,7 @@ export const projectsConfig: Array<{
   {
     repoName: 'music-tiles',
     image: '/projects/music-tiles.png',
-    previewImages: ['/previews/music-tiles-1.png', '/previews/music-tiles-2.png', '/previews/music-tiles-3.png','/previews/music-tiles-4.png','/previews/music-tiles-5.png','/previews/music-tiles-6.png','/previews/music-tiles-7.png','/previews/music-tiles-8.png'],
+    previewImages: ['/previews/music-tiles-1.PNG', '/previews/music-tiles-2.PNG', '/previews/music-tiles-3.PNG','/previews/music-tiles-4.PNG','/previews/music-tiles-5.PNG','/previews/music-tiles-6.PNG','/previews/music-tiles-7.PNG','/previews/music-tiles-8.PNG'],
     status: 'completed',
     description: 'Jeu interactif de tuiles musicales - Cliquez sur les tuiles au rythme de la musique pour marquer des points'
   },
