@@ -1,11 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { skillsData, skillsGroups } from '@/lib/skillsConfig';
+import { useState } from 'react';
+import { skillsGroups } from '@/lib/skillsConfig';
 
 export default function SkillsVisualization() {
   const [activeCategory, setActiveCategory] = useState<'frontend' | 'backend' | 'tools'>('frontend');
-  const [isAnimating, setIsAnimating] = useState(true);
 
   const categories = [
     { id: 'frontend', label: 'Frontend', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
@@ -40,12 +39,7 @@ export default function SkillsVisualization() {
           <div
             key={skill.name}
             className="flex flex-col items-center"
-            style={{
-              animation: isAnimating
-                ? `float 3s ease-in-out infinite`
-                : 'none',
-              animationDelay: `${index * 0.1}s`
-            }}
+            style={{ animation: `float 3s ease-in-out infinite`, animationDelay: `${index * 0.1}s` }}
           >
             {/* Animated Circle Container */}
             <div className="relative mb-4">
@@ -67,7 +61,7 @@ export default function SkillsVisualization() {
               <div
                 className={`w-32 h-32 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 border-2 group relative overflow-hidden`}
                 style={{
-                  backgroundColor: `${skill.bgColor}`,
+                  backgroundColor: `${skill.color}22`,
                   borderColor: skill.color,
                   boxShadow: `0 0 20px ${skill.color}33`
                 }}
@@ -81,12 +75,16 @@ export default function SkillsVisualization() {
                 />
 
                 {/* Icon */}
-                <img 
-                  src={skill.icon} 
-                  alt={skill.name}
-                  className="w-16 h-16 relative z-10 group-hover:scale-125 transition-transform duration-300 object-contain"
-                  style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.2))' }}
-                />
+                {skill.name === 'Microsoft Excel' ? (
+                  <span aria-label="Microsoft Excel" className="relative z-10 text-5xl font-bold text-emerald-400 transition-transform duration-300 group-hover:scale-110">X</span>
+                ) : (
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    className="w-16 h-16 relative z-10 group-hover:scale-125 transition-transform duration-300 object-contain"
+                    style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.2))' }}
+                  />
+                )}
 
                 {/* Pulse Animation */}
                 <div
@@ -124,16 +122,6 @@ export default function SkillsVisualization() {
               {skill.name}
             </h3>
 
-            {/* Progress Bar Under Name */}
-            <div className="w-full max-w-xs h-1 bg-slate-700 rounded-full mt-2 overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r rounded-full transition-all duration-1000"
-                style={{
-                  background: `linear-gradient(90deg, ${skill.color}, ${skill.color}dd)`,
-                  width: '85%'
-                }}
-              />
-            </div>
           </div>
         ))}
       </div>
@@ -143,7 +131,7 @@ export default function SkillsVisualization() {
         <p className="text-slate-300">
           {activeCategory === 'frontend' && 'Création d\'interfaces modernes et réactives avec les dernières technologies front-end.'}
           {activeCategory === 'backend' && 'Développement d\'applications robustes et scalables avec gestion de base de données.'}
-          {activeCategory === 'tools' && 'Maîtrise des outils essentiels pour le développement, le versionning et le debugging.'}
+          {activeCategory === 'tools' && 'Outils utilisés pour le développement, le versionnage, les tests d’API et le suivi des données.'}
         </p>
       </div>
 

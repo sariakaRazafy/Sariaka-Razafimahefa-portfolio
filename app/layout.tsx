@@ -13,8 +13,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RAZAFIMAHEFA Sariaka - Full Stack Developer",
-  description: "Full Stack Developer specializing in React.js and Symfony. Explore my portfolio of modern web applications.",
+  title: "Sariaka Razafimahefa | Data Analyst, Data Quality & Reporting",
+  description: "Data Analyst freelance spécialisée en analyse opérationnelle, qualité des données, reporting et suivi des KPI. Développement web et projets IA.",
+  openGraph: {
+    title: "Sariaka Razafimahefa | Data Analyst",
+    description: "Portfolio professionnel : Data Analysis, Data Quality, reporting, développement web et projets intégrant l’IA.",
+    locale: "fr_FR",
+    type: "website",
+    images: ["/zah.png"],
+  },
 };
 
 export default function RootLayout({
@@ -23,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

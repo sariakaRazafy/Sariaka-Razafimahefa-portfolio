@@ -106,6 +106,14 @@ export const skillsData: Skill[] = [
     bgColor: '#9C27B0/20',
     borderColor: '#9C27B0/50',
     category: 'tools'
+  },
+  {
+    name: 'Microsoft Excel',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftoffice/microsoftoffice-original.svg',
+    color: '#217346',
+    bgColor: '#217346/20',
+    borderColor: '#217346/50',
+    category: 'tools'
   }
 ];
 

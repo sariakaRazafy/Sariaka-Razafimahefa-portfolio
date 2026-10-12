@@ -62,15 +62,6 @@ export default function ProjectCarousel({
   };
 
   const currentProject = projects[currentIndex];
-  const projectImage = getProjectImage(
-    currentProject.title?.toLowerCase().replace(/\s+/g, '-')
-  );
-  const projectConfig = getProjectConfig(
-    currentProject.title?.toLowerCase().replace(/\s+/g, '-') || ''
-  );
-  const status = projectConfig?.status || 'completed';
-  const statusInfo = statusLabels[status];
-
   return (
     <div className="relative w-full max-w-4xl mx-auto">
       {/* Main Carousel Container */}
@@ -188,14 +179,16 @@ export default function ProjectCarousel({
                           📸 Aperçu
                         </button>
                       )}
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg transition transform hover:scale-105"
-                      >
-                        Voir le projet →
-                      </a>
+                      {project.link !== '#' && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg transition transform hover:scale-105"
+                        >
+                          Voir le projet →
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -208,7 +201,7 @@ export default function ProjectCarousel({
         <button
           onClick={handlePrevious}
           className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 md:p-3 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white rounded-full transition transform hover:scale-110"
-          aria-label="Previous slide"
+          aria-label="Projet précédent"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -218,7 +211,7 @@ export default function ProjectCarousel({
         <button
           onClick={handleNext}
           className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 md:p-3 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white rounded-full transition transform hover:scale-110"
-          aria-label="Next slide"
+          aria-label="Projet suivant"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -242,7 +235,7 @@ export default function ProjectCarousel({
                 ? 'bg-blue-600 w-3 h-3'
                 : 'bg-slate-600 hover:bg-slate-500 w-2.5 h-2.5'
             }`}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Afficher le projet ${index + 1}`}
           />
         ))}
       </div>

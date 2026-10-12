@@ -27,14 +27,14 @@ export const projectsConfig: Array<{
   {
     repoName: 'medipass',
     image: '/projects/medipass.png',
-    previewImages: ['/previews/medipass-1.png', '/previews/medipass-2.png', '/previews/medipass-3.png'],
+    previewImages: ['/projects/medipass.png'],
     status: 'in-progress',
-    description: 'Application de gestion médicale'
+    description: 'Projet académique de plateforme numérique de santé pour faciliter les échanges entre patients, médecins et laboratoires et l’accès aux informations médicales.'
   },
   {
     repoName: 'eagle-ai',
     image: '/projects/eagle_ai.png',
-    previewImages: ['/projects/eagle_ai.png', '/previews/eagle-ai-2.png', '/previews/eagle-ai-3.png'],
+    previewImages: ['/projects/eagle_ai.png'],
     status: 'in-progress',
     description: 'Système d\'IA avancé'
   },
