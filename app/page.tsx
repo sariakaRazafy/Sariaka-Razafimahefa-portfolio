@@ -164,7 +164,7 @@ export default function Home() {
                 Data Analyst <span className="text-emerald-300">| Data Quality &amp; Reporting | KPI</span>
               </h1>
               <p className="text-lg font-medium text-slate-200">
-                Freelance en analyse de données, reporting et informatique | Développement Web &amp; IA
+                Freelance en analyse de données, reporting et informatique | Profil polyvalent tech : développement Web &amp; IA
               </p>
               <p className="text-base leading-relaxed text-slate-300">
                 Étudiante en Master 2 en informatique, je travaille à distance avec Zenith RH, une entreprise française, comme Data Analyst / Assistante Marketing Digital. Je contribue au suivi des indicateurs, à la préparation de reportings et à la fiabilité des données.
